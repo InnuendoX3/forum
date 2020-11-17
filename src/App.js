@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'; // Delete ?
+import { Switch, Route } from 'react-router-dom'
+
+import PostListPage from './pages/PostListPage'
+import PostDetailPage from './pages/PostDetailPage'
+import PostCreatePage from './pages/PostCreatePage'
+import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
+import HomePage from './pages/HomePage'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Switch>
+        <Route path='/posts/create'> <PostCreatePage /> </Route>
+        <Route path='/posts/:id'> <PostDetailPage /> </Route> {/* Make to dynamic routing */}
+        <Route path='/posts'> <PostListPage /> </Route>
+        <Route path='/login'> <LoginPage /> </Route>
+        <Route path='/register'> <RegisterPage /> </Route>
+        <Route path='/home'> <HomePage /> </Route>
+
+        <Route path='/'> <div>Intro page</div> </Route>
+      </Switch>
     </div>
   );
 }
