@@ -13,7 +13,6 @@ export default function LoginPage() {
   }
   function handleSubmit(event) {
     console.log('Entrando')
-    event.preventDefault()
     const options = {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
@@ -23,17 +22,17 @@ export default function LoginPage() {
     fetch('https://lab.willandskill.eu/api/v1/auth/api-token-auth/', options)
     .then( response => response.json())
     .then( data => {
-      console.log('HOlaaa')
       console.log('data', data)
     })
+    event.preventDefault()
   }
 
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input type="text" onChange={handleEmailOnChange} name="email" placeholder="E-mail" />
         <input type="password" onChange={handlePasswordOnChange} name="password" placeholder="Password" />
-        <input type="submit" onClick={handleSubmit} value="Login" />
+        <input type="submit" value="Login" />
       </form>
       <div>
         <p>{email}</p>
