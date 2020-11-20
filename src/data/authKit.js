@@ -1,6 +1,7 @@
 class Auth {
-  BASE_URL = 'https://lab.willandskill.eu/'
-  AUTH_URL = `${this.BASE_URL}api/v1/auth/api-token-auth/`
+  BASE_URL = 'https://lab.willandskill.eu'
+  AUTH_URL = `${this.BASE_URL}/api/v1/auth/api-token-auth/`
+  ME_URL = `${this.BASE_URL}/api/v1/me`
 
   TOKEN_KEY = 'JWT_TOKEN'
 
@@ -38,6 +39,31 @@ class Auth {
 
   setToken(token) {
     sessionStorage.setItem(this.TOKEN_KEY, token)
+  }
+
+  getToken() {
+    return sessionStorage.getItem(this.TOKEN_KEY)
+  }
+
+  getUserInfo() {
+    const fetchOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.getToken()}`
+      }
+    }
+    return fetch(this.ME_URL, fetchOptions)
+    .then( resp => resp.json())
+    .then( data => data)
+    /** Return
+    country: null
+    email: "johncito@doe.se"
+    firstName: "Johncito"
+    id: 45
+    lastName: "Doe"
+    phoneNumber: null
+    title: null
+    */
   }
 
 

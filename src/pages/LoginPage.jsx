@@ -28,13 +28,18 @@ export default function LoginPage() {
     const loginResponse = await Auth.login(email, password)
     setErrorMessage(loginResponse) //For showing error message on login
     if (loginResponse.succeeded) {
-      //If ok set token and redirect to HOme
-      setUserInfo({ ...userInfo, isLoggedIn: true})
+      // Set token
       Auth.setToken(loginResponse.token)
-
+      // Set user info into userInfo context
+      const userInfoAPI = await Auth.getUserInfo()
+      setUserInfo({
+        isLoggedIn: true,
+        email:      userInfoAPI.email,
+        country:    userInfoAPI.country,
+        lastName:   userInfoAPI.lastName,
+        firstName:  userInfoAPI.firstName
+      })
     }
-
-    //if not show message
   }
 
   return (

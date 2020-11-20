@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './App.css'; // Delete ?
 import { Switch, Route, Redirect } from 'react-router-dom'
+import { UserContext } from './contexts/UserContext'
 
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
@@ -9,7 +10,8 @@ import PostListPage from './pages/PostListPage'
 import PostDetailPage from './pages/PostDetailPage'
 import PostCreatePage from './pages/PostCreatePage'
 
-import { UserContext } from './contexts/UserContext'
+import Navbar from './components/Navbar'
+
 
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
   return (
     <div className="App">
       <UserContext.Provider value={{userInfo, setUserInfo}}>
+        <Navbar />
         <Switch>
           <Route path='/posts/create'> 
             <PostCreatePage /> 
