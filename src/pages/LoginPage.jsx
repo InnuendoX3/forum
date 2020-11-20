@@ -1,10 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Auth from '../data/authKit'
+
+import { UserContext } from '../contexts/UserContext'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [loginInfo, setLoginInfo] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
+
+  //To useContext
+  const { userInfo, setUserInfo } = useContext(UserContext)
 
   function handleEmailInput(e) {
     setEmail(e.target.value)
@@ -21,9 +26,10 @@ export default function LoginPage() {
 
   async function authenticate() {
     const loginResponse = await Auth.login(email, password)
-    setLoginInfo(loginResponse) //For showing error message on login
+    setErrorMessage(loginResponse) //For showing error message on login
     if (loginResponse.succeeded) {
       //If ok set token and redirect to HOme
+      setUserInfo({ ...userInfo, isLoggedIn: true})
       Auth.setToken(loginResponse.token)
 
     }
@@ -39,7 +45,7 @@ export default function LoginPage() {
         <input type="submit" value="Login" />
       </form>
       <div>
-        <p>{ loginInfo && loginInfo.message } </p>
+        <p>{ errorMessage && errorMessage.message } </p>
         <small>{email} // {password}</small>
       </div>
     </div>
