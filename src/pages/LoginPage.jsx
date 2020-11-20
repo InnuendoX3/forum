@@ -4,7 +4,7 @@ import Auth from '../data/authKit'
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [tempData, setTempData] = useState(null)
+  const [loginInfo, setLoginInfo] = useState(null)
 
   function handleEmailInput(e) {
     setEmail(e.target.value)
@@ -21,7 +21,14 @@ export default function LoginPage() {
 
   async function authenticate() {
     const loginResponse = await Auth.login(email, password)
-    console.log('loginResponse Finally???', loginResponse)
+    setLoginInfo(loginResponse) //For showing error message on login
+    if (loginResponse.succeeded) {
+      //If ok set token and redirect to HOme
+      Auth.setToken(loginResponse.token)
+
+    }
+
+    //if not show message
   }
 
   return (
@@ -32,9 +39,8 @@ export default function LoginPage() {
         <input type="submit" value="Login" />
       </form>
       <div>
-        <p>{email}</p>
-        <p>{password}</p>
-        <p>{ tempData && tempData.token }</p>
+        <p>{ loginInfo && loginInfo.message } </p>
+        <small>{email} // {password}</small>
       </div>
     </div>
   )

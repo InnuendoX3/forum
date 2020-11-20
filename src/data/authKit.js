@@ -2,12 +2,13 @@ class Auth {
   BASE_URL = 'https://lab.willandskill.eu/'
   AUTH_URL = `${this.BASE_URL}api/v1/auth/api-token-auth/`
 
+  TOKEN_KEY = 'JWT_TOKEN'
+
   /* 
-  *  Return response {
-  *    succeeded: true/false
-  *    token: (Token if login succeded)
-  *    message: (Message if error)
-  *  }
+  *  Return loginResponse   
+  *     succeeded: true/false
+  *     token: (Token if login succeded)
+  *     message: (Message if error)
   */
   login(email, password) {
     const fetchOptions = {
@@ -31,12 +32,16 @@ class Auth {
       const messageFromAPI = Object.values(data)[0][0] // Get the message that API returns when problem
       loginResponse.token = data.token || ''
       loginResponse.message = loginResponse.succeeded ? '' : messageFromAPI
-      console.log('loginResponse1', loginResponse)
       return loginResponse
     })
   }
 
+  setToken(token) {
+    sessionStorage.setItem(this.TOKEN_KEY, token)
+  }
+
 
 }
+
 
 export default new Auth()
