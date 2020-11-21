@@ -45,6 +45,10 @@ class Auth {
     return sessionStorage.getItem(this.TOKEN_KEY)
   }
 
+  removeToken() {
+    sessionStorage.removeItem(this.TOKEN_KEY)
+  }
+
   getUserInfo() {
     const fetchOptions = {
       headers: {
@@ -65,7 +69,6 @@ class Auth {
     title: null
     */
   }
-
 
 }
 

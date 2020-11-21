@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react'
-import Auth from '../data/authKit'
+import React, { useState, useContext, useEffect } from 'react'
+import Auth from '../data/AuthKit'
 
 import { UserContext } from '../contexts/UserContext'
 
@@ -9,7 +9,7 @@ export default function LoginPage() {
   const [errorMessage, setErrorMessage] = useState(null)
 
   //To useContext
-  const { userInfo, setUserInfo } = useContext(UserContext)
+  const { setUserInfo, setIsLoggedIn } = useContext(UserContext)
 
   function handleEmailInput(e) {
     setEmail(e.target.value)
@@ -31,16 +31,30 @@ export default function LoginPage() {
       // Set token
       Auth.setToken(loginResponse.token)
       // Set user info into userInfo context
-      const userInfoAPI = await Auth.getUserInfo()
-      setUserInfo({
-        isLoggedIn: true,
-        email:      userInfoAPI.email,
-        country:    userInfoAPI.country,
-        lastName:   userInfoAPI.lastName,
-        firstName:  userInfoAPI.firstName
-      })
+      setUserInfoInContext()
+      setIsLoggedIn(true)
     }
   }
+
+  async function setUserInfoInContext() {
+    const userInfoAPI = await Auth.getUserInfo()
+    setUserInfo({
+      email:      userInfoAPI.email,
+      country:    userInfoAPI.country,
+      lastName:   userInfoAPI.lastName,
+      firstName:  userInfoAPI.firstName
+    })
+  }
+
+  useEffect(() => {
+    // TODO: Everything on context erases when refreshing page.
+    // useEffect asking for getToken on every page looking if there is a token?
+    // otherwise get everything again from API
+    if(Auth.getToken()) {
+      setUserInfoInContext()
+      setIsLoggedIn(true)
+    }
+  }, [])
 
   return (
     <div>
@@ -51,7 +65,7 @@ export default function LoginPage() {
       </form>
       <div>
         <p>{ errorMessage && errorMessage.message } </p>
-        <small>{email} // {password}</small>
+        <small>{email} / {password}</small>
       </div>
     </div>
   )
