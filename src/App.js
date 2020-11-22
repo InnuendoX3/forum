@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './App.css'; // Delete ?
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { UserContext } from './contexts/UserContext'
-import Auth from './data/AuthKit'
+
 
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
@@ -29,17 +29,17 @@ function App() {
       <UserContext.Provider value={{userInfo, setUserInfo, isLoggedIn, setIsLoggedIn}}>
         <Navbar />
         <Switch>
-          <Route path='/posts/create'> 
-            <PostCreatePage /> 
+          <Route path='/posts/create'>
+            { isLoggedIn ? <PostCreatePage />  : <Redirect to='/login' />}            
           </Route>
           <Route path='/posts/:id'> {/* Make to dynamic routing */}
             <PostDetailPage /> 
           </Route> 
           <Route path='/posts'>
-            <PostListPage />
+            { isLoggedIn ? <PostListPage /> : <Redirect to='/login' />}            
           </Route>
           <Route path='/home'>
-            <HomePage />
+            { isLoggedIn ? <HomePage /> : <Redirect to='/login' />}            
           </Route>
           <Route path='/login'>
             { isLoggedIn ? <Redirect to='/home' /> : <LoginPage />}
