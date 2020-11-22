@@ -4,14 +4,14 @@ class Auth {
 
   TOKEN_KEY = 'JWT_TOKEN'
 
-  fetchPostList() {
+  fetchPostList(url = this.POSTS_URL) {
     const fetchOptions = {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.getToken()}`
       }
     }
-    return fetch(this.POSTS_URL, fetchOptions)
+    return fetch(url, fetchOptions)
     .then( resp => resp.json())
     .then( data => data)
   }
