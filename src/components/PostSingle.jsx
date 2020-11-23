@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function PostSingle(props) {
   const { post } = props
@@ -7,6 +8,7 @@ export default function PostSingle(props) {
   return (
     <div>
       <h1> {post.title} </h1>
+      <Link to='/posts'>Back to all posts</Link>
       <p><strong>By {author}</strong></p>
       <p> {post.createdAt} </p>
       <p> {post.content} </p>
