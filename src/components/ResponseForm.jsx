@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Forum from '../data/ForumKit'
 
 /**
  * For my information:
@@ -9,14 +10,34 @@ import React from 'react'
 
 // TODO: Send responses // Props for history
 export default function ResponseForm(props) {
+  const postId = props.postId
+  const [title, setTitle] = useState('')
+  const [response, setResponse] = useState('')
 
-  function tempHandleSubmitTestHistory() {
-    props.history.push('/register')
+  function handleTitle(e) {
+    setTitle(e.target.value)
+  }
+  function handleResponse(e) {
+    setResponse(e.target.value)
+  }
+
+  async function tempHandleSubmitTestHistory() {
+    const newResponse = {
+      title: title,
+      content: response,
+      parent: postId
+    }
+    const resp = await Forum.createPost(newResponse)
+    console.log(resp)
+
+    // Redirect to the responded Post
+    props.history.push(`/posts/${postId}`)
   }
 
   return (
     <form onSubmit={tempHandleSubmitTestHistory}>
-      <input type="text" name="" id="" placeholder="Response // TODO!"/>
+      <input type="text" onChange={handleTitle} placeholder="Title" required/>
+      <textarea onChange={handleResponse} placeholder="Reply" required/>
       <button>Send</button>
     </form>
   )

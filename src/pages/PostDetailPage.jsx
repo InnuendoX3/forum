@@ -24,7 +24,7 @@ export default function PostDetailPage(props) {
     <>
       <PostSingle post={postDetails} />
       {/* TODO: Send Response */}
-      <ResponseForm history={props.history} />
+      <ResponseForm history={props.history} postId={postId} />
       <h2>--Responses--</h2>
       {
         postDetails.responses && <ResponseList responseList={postDetails.responses} />
