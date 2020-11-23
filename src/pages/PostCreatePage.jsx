@@ -1,9 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import Forum from '../data/ForumKit'
 
-export default function PostCreatePage() {
+import PostForm from '../components/PostForm'
+
+
+export default function PostCreatePage(props) {
+  
+  const [categories, setCategories] = useState(null)
+  async function getCategories() {
+    const categoriesFetched = await Forum.fetchCategories()
+    setCategories(categoriesFetched)
+  }
+  
+  useEffect(() => {
+    getCategories()
+  }, [])
+  
+
   return (
-    <div>
-      <h1>Post Create Page</h1>
-    </div>
+    <PostForm categories={categories}/>
   )
 }
