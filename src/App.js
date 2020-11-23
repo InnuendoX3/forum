@@ -43,7 +43,7 @@ function App() {
             { isLoggedIn ? <Redirect to='/home' /> : <LoginPage />}
           </Route>
           <Route path='/register'>
-            <RegisterPage />
+            { isLoggedIn ? <Redirect to='/home' /> : <RegisterPage />}
           </Route>
 
           <Route path='/'> <div>Intro page</div> </Route>

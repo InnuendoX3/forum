@@ -2,6 +2,8 @@ class Auth {
   BASE_URL = 'https://lab.willandskill.eu'
   AUTH_URL = `${this.BASE_URL}/api/v1/auth/api-token-auth/`
   ME_URL = `${this.BASE_URL}/api/v1/me`
+  COUNTRIES_URL = `${this.BASE_URL}/api/v1/countries/`
+  REGISTER_URL = `${this.BASE_URL}/api/v1/auth/users/`
 
   TOKEN_KEY = 'JWT_TOKEN'
 
@@ -37,6 +39,36 @@ class Auth {
     })
   }
 
+  // Register
+  createNewUser(newUser) {
+    const fetchOptions = {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(newUser)
+    }
+
+    let registerResponse = {
+      succeeded: false,
+      body: null,
+      errorMessages: null
+    }
+
+    return fetch(this.REGISTER_URL, fetchOptions)
+    .then(resp => {
+      registerResponse.succeeded = resp.status === 201
+      return resp.json()
+    })
+    .then(data => {
+      if(registerResponse.succeeded) {
+        registerResponse.body = data
+      } else {
+        registerResponse.errorMessages = data.email || data.password
+      }
+      return registerResponse
+    })
+
+  }
+
   setToken(token) {
     sessionStorage.setItem(this.TOKEN_KEY, token)
   }
@@ -68,6 +100,15 @@ class Auth {
     phoneNumber: null
     title: null
     */
+  }
+
+  fetchCountries() {
+    const fetchOptions = {
+      headers: {'Content-Type': 'application/json'}
+    }
+    return fetch(this.COUNTRIES_URL, fetchOptions)
+    .then( resp => resp.json())
+    .then( data => data.results)
   }
 
 }
