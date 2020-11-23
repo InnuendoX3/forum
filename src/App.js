@@ -30,11 +30,9 @@ function App() {
         <Navbar />
         <Switch>
           <Route path='/posts/create'>
-            { isLoggedIn ? <PostCreatePage />  : <Redirect to='/login' />}            
+            { isLoggedIn ? <PostCreatePage /> : <Redirect to='/login' />}            
           </Route>
-          <Route path='/posts/:id'> {/* Make to dynamic routing */}
-            <PostDetailPage /> 
-          </Route> 
+          <Route path='/posts/:id' component={PostDetailPage} /> {/* Make to dynamic routing */}
           <Route path='/posts'>
             { isLoggedIn ? <PostListPage /> : <Redirect to='/login' />}            
           </Route>

@@ -8,23 +8,20 @@ import PostList from '../components/PostList'
 export default function PostListPage() {
   const [postList, setPostList] = useState(null)
 
-  async function fetchPostList(url) {
+  async function getPostList(url) {
     const postListFetched = await Forum.fetchPostList(url)
-    console.log('postList completo', postListFetched)
-    console.log('postListFetched.next', postListFetched.next)
-    console.log('postListFetched.previous', postListFetched.previous)
     setPostList(postListFetched)
   }
 
   useEffect(() => {
-    fetchPostList()
+    getPostList()
   }, [])
 
   function handleNext() {
-    fetchPostList(postList.next)
+    getPostList(postList.next)
   }
   function handlePrevious() {
-    fetchPostList(postList.previous)
+    getPostList(postList.previous)
 
   }
 

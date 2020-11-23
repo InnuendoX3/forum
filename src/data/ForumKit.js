@@ -1,4 +1,4 @@
-class Auth {
+class Forum {
   BASE_URL = 'https://lab.willandskill.eu'
   POSTS_URL = `${this.BASE_URL}/api/v1/forum/posts/`
 
@@ -16,10 +16,23 @@ class Auth {
     .then( data => data)
   }
 
+  fetchPostDetails(postId) {
+    const detailUrl = `${this.POSTS_URL}${postId}/`
+    const fetchOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.getToken()}`
+      }
+    }
+    return fetch(detailUrl, fetchOptions)
+    .then( resp => resp.json())
+    .then( data => data)
+  }
+
   getToken() {
     return sessionStorage.getItem(this.TOKEN_KEY)
   }
 
 }
 
-export default new Auth
+export default new Forum()
