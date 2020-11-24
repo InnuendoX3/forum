@@ -1,7 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react'
+import { UserContext } from '../contexts/UserContext'
 import Auth from '../data/AuthKit'
 
-import { UserContext } from '../contexts/UserContext'
+import TextInput from '../components/styled/TextInput'
+import SubmitButton from '../components/styled/SubmitButton'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -59,9 +61,9 @@ export default function LoginPage() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input type="text" onChange={handleEmailInput} name="email" placeholder="E-mail" />
-        <input type="password" onChange={handlePasswordInput} name="password" placeholder="Password" />
-        <input type="submit" value="Login" />
+        <TextInput type="text" onChange={handleEmailInput} name="email" placeholder="E-mail" />
+        <TextInput type="password" onChange={handlePasswordInput} name="password" placeholder="Password" />
+        <SubmitButton value="Login" />
       </form>
       <div>
         <p>{ errorMessage && errorMessage.message } </p>

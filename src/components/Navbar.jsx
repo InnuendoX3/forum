@@ -22,8 +22,6 @@ export default function Navbar() {
     Auth.removeToken()
     setIsLoggedIn(false)
     setUserInfo({})
-
-    // TODO: Set UserInfo.isLoggedIn to FALSE!
   }
 
   return (

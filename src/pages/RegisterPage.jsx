@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import Auth from '../data/AuthKit'
 
+import TextInput from '../components/styled/TextInput'
+import SubmitButton from '../components/styled/SubmitButton'
+import Select from '../components/styled/Select'
+
+
 export default function RegisterPage() {
   let history = useHistory()
   const [email, setEmail] = useState('')
@@ -59,16 +64,16 @@ export default function RegisterPage() {
     <>
       <h1>Register Page</h1>
       <form onSubmit={handleSubmit}>
-        <input type="text" onChange={handleEmailInput} placeholder="Email" required />
-        <input type="text" onChange={handlePasswordInput} placeholder="Password" required />
-        <input type="text" onChange={handleFirstNameInput} placeholder="First name" required />
-        <input type="text" onChange={handleLastNameInput} placeholder="Last name" required />
-        <select name="countries" onChange={handleCountriesInput}>
+        <TextInput type="text" onChange={handleEmailInput} placeholder="Email" required />
+        <TextInput type="text" onChange={handlePasswordInput} placeholder="Password" required />
+        <TextInput type="text" onChange={handleFirstNameInput} placeholder="First name" required />
+        <TextInput type="text" onChange={handleLastNameInput} placeholder="Last name" required />
+        <Select name="countries" onChange={handleCountriesInput}>
           {countries && countries.map((country, index) => {
             return <option value={country.id} key={index}> {country.title} </option>
           })}
-        </select>
-        <button>Register</button>
+        </Select>
+        <SubmitButton value='Register2' />
       </form>
       <div> { errorMessages && errorMessages.map((errorMessage, index) => {
         return <div key={index}> {errorMessage} </div>
