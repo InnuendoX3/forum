@@ -2,6 +2,13 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Forum from '../data/ForumKit'
 
+
+import Form from './styled/Form'
+import Select from './styled/Select'
+import SubmitButton from './styled/SubmitButton'
+import TextArea from './styled/TextArea'
+import TextInput from './styled/TextInput'
+
 /**
  * Render a form for create a New Post
  * Props Categories comes from the API
@@ -44,15 +51,15 @@ export default function PostForm(props) {
   }
 
   return (
-    <form onSubmit={handleFormSubmit}>
-      <input type="text" name="title" onChange={handleTitle} placeholder="Title" required />
-      <textarea name="content" onChange={handleContent} placeholder="Content" rows="4" cols="50" required />
-      <select name="categories" onChange={handleCategory} >
+    <Form onSubmit={handleFormSubmit}>
+      <TextInput type="text" name="title" onChange={handleTitle} placeholder="Title" required />
+      <TextArea name="content" onChange={handleContent} placeholder="Content" rows="4" cols="50" required />
+      <Select name="categories" onChange={handleCategory} >
         { categories && categories.map((category, index) => {
           return <option value={category.id} key={index}>{category.title}</option>
         })}
-      </select>
-      <button>Send</button>
-    </form>
+      </Select>
+      <SubmitButton value='Send' />
+    </Form>
   )
 }

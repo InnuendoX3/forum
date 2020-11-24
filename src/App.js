@@ -28,21 +28,28 @@ function App() {
           <Route path='/posts/create'>
             { isLoggedIn ? <PostCreatePage /> : <Redirect to='/login' />}            
           </Route>
-          <Route path='/posts/:id' component={PostDetailPage} /> {/* Make to dynamic routing */}
+          
+          <Route path='/posts/:id' component={PostDetailPage} />
+
           <Route path='/posts'>
             { isLoggedIn ? <PostListPage /> : <Redirect to='/login' />}            
           </Route>
+
           <Route path='/home'>
             { isLoggedIn ? <HomePage /> : <Redirect to='/login' />}            
           </Route>
+
           <Route path='/login'>
             { isLoggedIn ? <Redirect to='/home' /> : <LoginPage />}
           </Route>
+
           <Route path='/register'>
             { isLoggedIn ? <Redirect to='/home' /> : <RegisterPage />}
           </Route>
 
-          <Route path='/'> <div>Intro page</div> </Route>
+          <Route path='/'> 
+            <Redirect to='/login' />
+          </Route>
         </Switch>
       </UserContext.Provider>
     </>
