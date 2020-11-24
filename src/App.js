@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import './App.css'; // Delete ?
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { UserContext } from './contexts/UserContext'
-
 
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
@@ -12,7 +10,6 @@ import PostDetailPage from './pages/PostDetailPage'
 import PostCreatePage from './pages/PostCreatePage'
 
 import Navbar from './components/Navbar'
-
 
 
 function App() {
@@ -25,7 +22,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   return (
-    <div className="App">
+    <>
       <UserContext.Provider value={{userInfo, setUserInfo, isLoggedIn, setIsLoggedIn}}>
         <Navbar />
         <Switch>
@@ -49,7 +46,7 @@ function App() {
           <Route path='/'> <div>Intro page</div> </Route>
         </Switch>
       </UserContext.Provider>
-    </div>
+    </>
   );
 }
 

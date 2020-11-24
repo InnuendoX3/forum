@@ -1,11 +1,22 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { UserContext } from '../contexts/UserContext'
+import styled from 'styled-components'
+//import { Link } from 'react-router-dom'
 
 import Auth from '../data/AuthKit'
-import { UserContext } from '../contexts/UserContext'
+import Link from './styled/Link'
+
+const NavbarStyled = styled.div`
+  background-color: #495464;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 
 export default function Navbar() {
-  const { setIsLoggedIn, setUserInfo } = useContext(UserContext)
+  const { isLoggedIn, setIsLoggedIn, setUserInfo } = useContext(UserContext)
 
   function logout() {
     Auth.removeToken()
@@ -16,22 +27,12 @@ export default function Navbar() {
   }
 
   return (
-    <div>
-      <span>
-        <Link to='/login' >Login</Link> -
-      </span>
-      <span>
-        <Link to='/register' >Register</Link> -
-      </span>
-      <span>
-        <Link to='/home' >Home</Link> -
-      </span>
-      <span>
-        <Link to='/posts' >Posts</Link> -
-      </span>
-      <span>
-        <Link to='/login' onClick={logout} >Logout</Link>
-      </span>
-    </div>
+    <NavbarStyled>
+        { !isLoggedIn && <Link to='/login' >Login</Link> }
+        { !isLoggedIn && <Link to='/register' >Register</Link>}
+        { isLoggedIn && <Link to='/home' >Home</Link>}
+        { isLoggedIn && <Link to='/posts' >Posts</Link>}
+        { isLoggedIn && <Link to='/login' onClick={logout} >Logout</Link>}
+    </NavbarStyled>
   )
 }
