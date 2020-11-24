@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
 import Forum from '../data/ForumKit'
 
+import Form from './styled/Form'
+import SubmitButton from './styled/SubmitButton'
+import Subtitle from './styled/Subtitle'
+import TextArea from './styled/TextArea'
+import TextInput from './styled/TextInput'
+
 /**
  * For my information:
  * props.history only appears if the component
@@ -35,10 +41,11 @@ export default function ResponseForm(props) {
   }
 
   return (
-    <form onSubmit={tempHandleSubmitTestHistory}>
-      <input type="text" onChange={handleTitle} placeholder="Title" required/>
-      <textarea onChange={handleResponse} placeholder="Reply" required/>
-      <button>Send</button>
-    </form>
+    <Form onSubmit={tempHandleSubmitTestHistory}>
+      <Subtitle>Send a response</Subtitle>
+      <TextInput type="text" onChange={handleTitle} placeholder="Title" required/>
+      <TextArea rows="4" onChange={handleResponse} placeholder="Reply" required/>
+      <SubmitButton value="Response" />
+    </Form>
   )
 }

@@ -7,6 +7,7 @@ import ResponseList from '../components/ResponseList'
 
 import Page from '../components/styled/Page'
 import WrapperHor from '../components/styled/WrapperHor'
+import Subtitle from '../components/styled/Subtitle'
 
 
 export default function PostDetailPage(props) {
@@ -30,7 +31,7 @@ export default function PostDetailPage(props) {
         <PostSingle post={postDetails} />
         {/* TODO: Send Response */}
         <ResponseForm history={props.history} postId={postId} />
-        <h2>--Responses--</h2>
+        <Subtitle>Responses</Subtitle>
         {
           postDetails.responses && <ResponseList responseList={postDetails.responses} />
         }

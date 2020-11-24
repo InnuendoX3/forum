@@ -1,13 +1,33 @@
 import React from 'react'
+import styled from 'styled-components'
+
+const Response = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+`
+const Title = styled.h3`
+  margin: 20px 0 0 0;
+`
+const By = styled.small`
+
+`
+const Content = styled.p`
+
+`
+
 
 export default function ResponseSingle(props) {
   const { response } = props
   const author = response.author ? `${response.author.firstName} ${response.author.lastName}` : '---'
   return (
-    <div>
-      <h3> {response.title} </h3>
-      <p> By {author}</p>
-      <p> {response.content} </p>
-    </div>
+    <>
+    <Response>
+      <Title> {response.title} </Title>
+      <By> By {author}</By>
+      <Content> {response.content} </Content>
+    </Response>
+    <hr/>
+    </>
   )
 }
