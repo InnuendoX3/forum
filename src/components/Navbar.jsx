@@ -7,7 +7,7 @@ import Auth from '../data/AuthKit'
 import Link from './styled/Link'
 
 const NavbarStyled = styled.div`
-  background-color: #495464;
+  background-color: #e8e8e8;
   height: 50px;
   display: flex;
   justify-content: center;

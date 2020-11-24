@@ -11,6 +11,9 @@ import WrapperHor from '../components/styled/WrapperHor'
 import Title from '../components/styled/Title'
 import Error from '../components/styled/Error'
 
+const PageCenter = styled(Page)`
+  min-height: 70vh;
+`
 const ErrorWrapper = styled(WrapperHor)`
   padding-top: 10px;
 `
@@ -69,7 +72,7 @@ export default function LoginPage() {
   }, [])
 
   return (
-    <Page>
+    <PageCenter>
       <WrapperHor>
         <Title>Login</Title>
         <Form onSubmit={handleSubmit}>
@@ -82,6 +85,6 @@ export default function LoginPage() {
           {/* <small>{email} / {password}</small> */}
         </ErrorWrapper>
       </WrapperHor>
-    </Page>
+    </PageCenter>
   )
 }

@@ -12,6 +12,9 @@ import WrapperHor from '../components/styled/WrapperHor'
 import Title from '../components/styled/Title'
 import Error from '../components/styled/Error'
 
+const PageCenter = styled(Page)`
+  min-height: 70vh;
+`
 const ErrorWrapper = styled(WrapperHor)`
   padding-top: 10px;
 `
@@ -71,7 +74,7 @@ export default function RegisterPage() {
   }, [])
   
   return (
-    <Page>
+    <PageCenter>
       <WrapperHor>
       <Title>Register</Title>
       <Form onSubmit={handleSubmit}>
@@ -94,6 +97,6 @@ export default function RegisterPage() {
         } 
       </ErrorWrapper>
       </WrapperHor>
-    </Page>
+    </PageCenter>
   )
 }
