@@ -11,8 +11,6 @@ import PostCreatePage from './pages/PostCreatePage'
 
 import Navbar from './components/Navbar'
 
-
-
 function App() {
   const [userInfo, setUserInfo] = useState({
     email:      '',
