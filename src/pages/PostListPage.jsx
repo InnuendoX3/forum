@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom'
 
 import Forum from '../data/ForumKit'
 import PostList from '../components/PostList'
+import Page from '../components/styled/Page'
+import Title from '../components/styled/Title'
+import LinkButton from '../components/styled/LinkButton'
+import Button from '../components/styled/Button'
+import WrapperHor from '../components/styled/WrapperHor'
 
 // TODO: Show links for more post, when more than 30
 export default function PostListPage() {
@@ -26,22 +31,22 @@ export default function PostListPage() {
   }
 
   return (
-    <div>
-      <h1>Post List page</h1>
-      <Link to='/posts/create'>Create a Post</Link>
-      {
-        postList && (
-          <>
-            <div>
-              { postList.previous && <button onClick={handlePrevious}>Previous Posts</button>}
-              { postList.next && <button onClick={handleNext}>Next Posts</button>}
-            </div>
-            <PostList postList={postList.results} /> 
-          </>
-        )
-      }
-
-
-    </div>
+    <Page>
+      <WrapperHor>
+        <Title>Post List page</Title>
+        <LinkButton to='/posts/create'>Create a Post</LinkButton>
+        {
+          postList && (
+            <>
+              <div>
+                { postList.previous && <Button onClick={handlePrevious}>Previous Posts</Button>}
+                { postList.next && <Button onClick={handleNext}>Next Posts</Button>}
+              </div>
+              <PostList postList={postList.results} /> 
+            </>
+          )
+        }
+      </WrapperHor>
+    </Page>
   )
 }
