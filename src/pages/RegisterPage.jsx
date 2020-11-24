@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import Auth from '../data/AuthKit'
+import styled from 'styled-components'
 
 import TextInput from '../components/styled/TextInput'
 import SubmitButton from '../components/styled/SubmitButton'
 import Select from '../components/styled/Select'
+import Form from '../components/styled/Form'
+import Page from '../components/styled/Page'
+import WrapperHor from '../components/styled/WrapperHor'
+import Title from '../components/styled/Title'
+import Error from '../components/styled/Error'
+
+const ErrorWrapper = styled(WrapperHor)`
+  padding-top: 10px;
+`
 
 
 export default function RegisterPage() {
@@ -61,11 +71,12 @@ export default function RegisterPage() {
   }, [])
   
   return (
-    <>
-      <h1>Register Page</h1>
-      <form onSubmit={handleSubmit}>
+    <Page>
+      <WrapperHor>
+      <Title>Register</Title>
+      <Form onSubmit={handleSubmit}>
         <TextInput type="text" onChange={handleEmailInput} placeholder="Email" required />
-        <TextInput type="text" onChange={handlePasswordInput} placeholder="Password" required />
+        <TextInput type="password" onChange={handlePasswordInput} placeholder="Password" required />
         <TextInput type="text" onChange={handleFirstNameInput} placeholder="First name" required />
         <TextInput type="text" onChange={handleLastNameInput} placeholder="Last name" required />
         <Select name="countries" onChange={handleCountriesInput}>
@@ -73,11 +84,16 @@ export default function RegisterPage() {
             return <option value={country.id} key={index}> {country.title} </option>
           })}
         </Select>
-        <SubmitButton value='Register2' />
-      </form>
-      <div> { errorMessages && errorMessages.map((errorMessage, index) => {
-        return <div key={index}> {errorMessage} </div>
-      })} </div>
-    </>
+        <SubmitButton value='Register' />
+      </Form>
+      <ErrorWrapper> 
+        { 
+          errorMessages && errorMessages.map((errorMessage, index) => {
+            return <Error key={index}> {errorMessage} </Error>
+          })
+        } 
+      </ErrorWrapper>
+      </WrapperHor>
+    </Page>
   )
 }

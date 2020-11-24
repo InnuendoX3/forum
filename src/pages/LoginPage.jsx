@@ -1,9 +1,19 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../contexts/UserContext'
 import Auth from '../data/AuthKit'
+import styled from 'styled-components'
 
 import TextInput from '../components/styled/TextInput'
 import SubmitButton from '../components/styled/SubmitButton'
+import Form from '../components/styled/Form'
+import Page from '../components/styled/Page'
+import WrapperHor from '../components/styled/WrapperHor'
+import Title from '../components/styled/Title'
+import Error from '../components/styled/Error'
+
+const ErrorWrapper = styled(WrapperHor)`
+  padding-top: 10px;
+`
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -59,16 +69,19 @@ export default function LoginPage() {
   }, [])
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <TextInput type="text" onChange={handleEmailInput} name="email" placeholder="E-mail" />
-        <TextInput type="password" onChange={handlePasswordInput} name="password" placeholder="Password" />
-        <SubmitButton value="Login" />
-      </form>
-      <div>
-        <p>{ errorMessage && errorMessage.message } </p>
-        <small>{email} / {password}</small>
-      </div>
-    </div>
+    <Page>
+      <WrapperHor>
+        <Title>Login</Title>
+        <Form onSubmit={handleSubmit}>
+          <TextInput type="text" onChange={handleEmailInput} name="email" placeholder="E-mail" />
+          <TextInput type="password" onChange={handlePasswordInput} name="password" placeholder="Password" />
+          <SubmitButton value="Login" />
+        </Form>
+        <ErrorWrapper>
+          <Error>{ errorMessage && errorMessage.message } </Error>
+          {/* <small>{email} / {password}</small> */}
+        </ErrorWrapper>
+      </WrapperHor>
+    </Page>
   )
 }
